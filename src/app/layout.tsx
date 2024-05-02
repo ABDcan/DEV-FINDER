@@ -9,7 +9,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "DevFi",
-  description: "",
+  description:
+    "An application to help pair programming with other developers online",
 };
 
 export default function RootLayout({
