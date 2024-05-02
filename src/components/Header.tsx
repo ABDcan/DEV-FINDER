@@ -13,7 +13,7 @@ export const Header = () => {
   const isLoggedIn = !!session.data;
 
   return (
-    <header className="bg-slate-100 py-1 dark:bg-slate-800 z-10 relative ">
+    <header className="bg-slate-100 py-1 dark:bg-slate-900 z-10 relative ">
       <div className="container mx-auto flex justify-between items-center">
         <Link
           href="/"
