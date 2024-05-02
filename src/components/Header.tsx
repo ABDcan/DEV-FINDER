@@ -9,7 +9,7 @@ export const Header = () => {
   const session = useSession();
 
   return (
-    <header>
+    <header className="bg-gray-100 py-2 dark:bg-gray-800 z-10 relative opacity-90">
       <div className="">
         {session.data ? (
           <Button onClick={() => signOut()}>Sign out</Button>
