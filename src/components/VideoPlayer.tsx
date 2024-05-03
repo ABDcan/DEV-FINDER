@@ -3,6 +3,7 @@
 import {
   Call,
   CallControls,
+  CallParticipantsList,
   SpeakerLayout,
   StreamCall,
   StreamTheme,
@@ -34,6 +35,8 @@ export const VideoPlayer = ({ room }: { room: Room }) => {
       apiKey,
       user: {
         id: userId,
+        name: session.data.user.name ?? undefined,
+        image: session.data.user.image ?? undefined,
       },
       tokenProvider: () => generateTokenAction(),
     });
@@ -45,8 +48,12 @@ export const VideoPlayer = ({ room }: { room: Room }) => {
     setCall(call);
 
     return () => {
-      call.leave();
-      client.disconnectUser();
+      call
+        .leave()
+        .then(() => {
+          client.disconnectUser();
+        })
+        .catch(console.error);
     };
   }, [session, room]);
 
@@ -57,7 +64,12 @@ export const VideoPlayer = ({ room }: { room: Room }) => {
         <StreamTheme>
           <StreamCall call={call}>
             <SpeakerLayout />
-            <CallControls />
+            <CallControls
+              onLeave={() => {
+                router.push("/");
+              }}
+            />
+            <CallParticipantsList onClose={() => undefined} />
           </StreamCall>
         </StreamTheme>
       </StreamVideo>
