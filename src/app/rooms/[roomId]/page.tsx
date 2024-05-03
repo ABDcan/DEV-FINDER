@@ -4,6 +4,7 @@ import Link from "next/link";
 import { TagsList } from "@/components/TagsList";
 import { getRoomById } from "@/data-access/rooms";
 import { splitTags } from "@/lib/utils";
+import { VideoPlayer } from "@/components/VideoPlayer";
 
 type Props = {
   params: {
@@ -31,7 +32,7 @@ const RoomDetailsPage = async ({ params }: Props) => {
     <div className="grid grid-cols-4 min-h-screen">
       <div className="col-span-3 p-4 pr-2">
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-4 min-h-screen">
-          VIDEO
+          <VideoPlayer room={room} />
         </div>
       </div>
 
