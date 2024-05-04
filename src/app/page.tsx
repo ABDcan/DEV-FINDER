@@ -1,11 +1,16 @@
 import Link from "next/link";
 
 import { RoomCard } from "@/components/RoomCard";
+import { SearchBar } from "@/components/SearchBar";
 import { Button } from "@/components/ui/button";
 import { getRooms } from "@/data-access/rooms";
 
-export default async function Home() {
-  const rooms = await getRooms();
+type Props = {
+  searchParams: { search: string };
+};
+
+export default async function Home({ searchParams }: Props) {
+  const rooms = await getRooms(searchParams.search);
 
   return (
     <main className="min-h-screen p-16">
@@ -16,7 +21,9 @@ export default async function Home() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
+      <SearchBar />
+
+      <div className="grid grid-cols-3 gap-4 mt-12">
         {rooms.map((room) => (
           <RoomCard key={room.id} room={room} />
         ))}
