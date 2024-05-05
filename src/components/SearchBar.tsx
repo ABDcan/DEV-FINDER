@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { SearchIcon } from "lucide-react";
+import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -35,6 +36,12 @@ export const SearchBar = () => {
     if (values.search) router.push(`/search?q=${values.search}`);
     else router.push("/");
   };
+
+  const search = query.get("search");
+
+  useEffect(() => {
+    form.setValue("search", search ?? "");
+  }, [search]);
 
   return (
     <Form {...form}>
