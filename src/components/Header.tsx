@@ -7,6 +7,7 @@ import Image from "next/image";
 import { AccountDropdown } from "./AccountDropdown";
 import { ModeToggle } from "./ModeToggle";
 import { Button } from "./ui/button";
+import { Tv2 } from "lucide-react";
 
 export const Header = () => {
   const session = useSession();
@@ -28,6 +29,16 @@ export const Header = () => {
             <AccountDropdown />
           ) : (
             <Button onClick={() => signIn("google")}>Sign in</Button>
+          )}
+
+          {isLoggedIn && (
+            <Link
+              href="/your-rooms"
+              className="hover:underline text-sm font-medium flex items-center"
+            >
+              <Tv2 className="h-4 w-4 mr-2" />
+              Your rooms
+            </Link>
           )}
 
           <ModeToggle />

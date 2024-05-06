@@ -25,8 +25,8 @@ export const AccountDropdown = () => {
             <AvatarImage
               src={session.data?.user?.image ?? "/default-user.jpg"}
             />
-            <AvatarFallback>
-              {session.data?.user?.name ? session.data?.user?.name[0] : "CN"}
+            <AvatarFallback className="rounded-full border border-gray-300">
+              CN
             </AvatarFallback>
           </Avatar>
 
