@@ -1,10 +1,12 @@
+import { unstable_noStore } from "next/cache";
 import Link from "next/link";
 
-import { RoomCard } from "@/components/RoomCard";
 import { Button } from "@/components/ui/button";
 import { getOwnRooms } from "@/data-access/rooms";
+import { UserRoomCard } from "./UserRoomCard";
 
 export default async function YourRoomsPage() {
+   unstable_noStore();
   const rooms = await getOwnRooms();
 
   return (
@@ -16,9 +18,9 @@ export default async function YourRoomsPage() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 mt-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {rooms.map((room) => (
-          <RoomCard key={room.id} room={room} />
+          <UserRoomCard key={room.id} room={room} />
         ))}
       </div>
     </main>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { unstable_noStore } from "next/cache";
 
 import { RoomCard } from "@/components/RoomCard";
 import { SearchBar } from "@/components/SearchBar";
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export default async function Home({ searchParams }: Props) {
+  unstable_noStore();
   const rooms = await getRooms(searchParams.search);
 
   return (

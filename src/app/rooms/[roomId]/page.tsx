@@ -5,6 +5,7 @@ import { TagsList } from "@/components/TagsList";
 import { getRoomById } from "@/data-access/rooms";
 import { splitTags } from "@/lib/utils";
 import { VideoPlayer } from "@/components/VideoPlayer";
+import { unstable_noStore } from "next/cache";
 
 type Props = {
   params: {
@@ -14,6 +15,7 @@ type Props = {
 
 const RoomDetailsPage = async ({ params }: Props) => {
   const roomId = params.roomId;
+  unstable_noStore();
   const room = await getRoomById(roomId);
 
   if (!room)

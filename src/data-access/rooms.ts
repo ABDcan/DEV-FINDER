@@ -6,7 +6,6 @@ import { room } from "@/db/schema";
 import { getSession } from "@/lib/auth";
 
 export async function getRooms(search: string | undefined) {
-  unstable_noStore();
   const where = search ? like(room.tags, `%${search}%`) : undefined;
 
   const rooms = await db.query.room.findMany({
@@ -17,7 +16,6 @@ export async function getRooms(search: string | undefined) {
 }
 
 export async function getOwnRooms() {
-  unstable_noStore();
   const session = await getSession();
   if (!session) throw new Error("User not authenticated");
 
@@ -35,4 +33,10 @@ export async function getRoomById(roomId: string) {
   });
 
   return existingRoom;
+}
+
+export async function deleteRoom(roomId: string) {
+  await db.delete(room).where(eq(room.id, roomId));
+
+  return;
 }
