@@ -7,7 +7,7 @@ import Image from "next/image";
 import { AccountDropdown } from "./AccountDropdown";
 import { ModeToggle } from "./ModeToggle";
 import { Button } from "./ui/button";
-import { Tv2 } from "lucide-react";
+import { FolderSearch2, Tv2 } from "lucide-react";
 
 export const Header = () => {
   const session = useSession();
@@ -24,21 +24,33 @@ export const Header = () => {
           Devfi
         </Link>
 
+        <nav className="flex gap-3">
+          {isLoggedIn && (
+            <>
+              <Link
+                href="/browse"
+                className="hover:underline text-sm font-medium flex items-center"
+              >
+                <FolderSearch2 className="h-4 w-4 mr-2" />
+                Browse
+              </Link>
+
+              <Link
+                href="/your-rooms"
+                className="hover:underline text-sm font-medium flex items-center"
+              >
+                <Tv2 className="h-4 w-4 mr-2" />
+                Your rooms
+              </Link>
+            </>
+          )}
+        </nav>
+
         <div className="flex items-center gap-4">
           {isLoggedIn ? (
             <AccountDropdown />
           ) : (
             <Button onClick={() => signIn("google")}>Sign in</Button>
-          )}
-
-          {isLoggedIn && (
-            <Link
-              href="/your-rooms"
-              className="hover:underline text-sm font-medium flex items-center"
-            >
-              <Tv2 className="h-4 w-4 mr-2" />
-              Your rooms
-            </Link>
           )}
 
           <ModeToggle />
