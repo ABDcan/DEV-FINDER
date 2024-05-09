@@ -24,7 +24,7 @@ export const Header = () => {
           Devfi
         </Link>
 
-        <nav className="flex gap-3">
+        <nav className="flex gap-4">
           {isLoggedIn && (
             <>
               <Link

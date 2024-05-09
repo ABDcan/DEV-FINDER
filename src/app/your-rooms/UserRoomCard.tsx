@@ -1,6 +1,6 @@
 "use client";
 
-import { GithubIcon, Trash2 } from "lucide-react";
+import { GithubIcon, PencilIcon, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 import {
@@ -38,6 +38,10 @@ export const UserRoomCard = ({ room }: Props) => {
   return (
     <Card className="dark:bg-slate-900 bg-slate-50">
       <CardHeader className="pb-4 relative">
+        <Link href={`/edit-room/${room.id}`} className="absolute top-2 right-2">
+          <PencilIcon className="h-4 w-4" />
+        </Link>
+
         <CardTitle>{room.name}</CardTitle>
         <CardDescription>{room.description}</CardDescription>
       </CardHeader>
