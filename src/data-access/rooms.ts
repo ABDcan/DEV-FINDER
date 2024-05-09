@@ -43,7 +43,12 @@ export async function createRoom(
   roomData: Omit<Room, "id" | "userId">,
   userId: string
 ) {
-  await db.insert(room).values({ ...roomData, userId });
+  const inserted = await db
+    .insert(room)
+    .values({ ...roomData, userId })
+    .returning();
+
+  return inserted[0];
 }
 
 export async function editRoom(roomData: Room) {

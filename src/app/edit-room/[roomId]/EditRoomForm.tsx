@@ -1,9 +1,8 @@
 "use client";
 
-import { z } from "zod";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -16,8 +15,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { editRoomAction } from "./actions";
 import { Room } from "@/db/schema";
+import { editRoomAction } from "./actions";
+import { useToast } from "@/components/ui/use-toast";
 
 const editRoomSchema = z.object({
   name: z.string().min(1).max(50),
@@ -32,7 +32,7 @@ type Props = {
 };
 
 export const EditRoomForm = ({ roomId, room }: Props) => {
-  const router = useRouter();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof editRoomSchema>>({
     resolver: zodResolver(editRoomSchema),
@@ -46,6 +46,11 @@ export const EditRoomForm = ({ roomId, room }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof editRoomSchema>) => {
     await editRoomAction({ ...values, id: roomId });
+
+    toast({
+      title: "Created!",
+      description: "Your room was successfully created!",
+    });
   };
 
   return (
