@@ -1,12 +1,13 @@
+import { Button } from "@/components/ui/button";
 import { unstable_noStore } from "next/cache";
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
 import { getOwnRooms } from "@/data-access/rooms";
+import Image from "next/image";
 import { UserRoomCard } from "./UserRoomCard";
 
 export default async function YourRoomsPage() {
-   unstable_noStore();
+  unstable_noStore();
   const rooms = await getOwnRooms();
 
   return (
@@ -23,6 +24,19 @@ export default async function YourRoomsPage() {
           <UserRoomCard key={room.id} room={room} />
         ))}
       </div>
+
+      {rooms.length === 0 && (
+        <div className="flex justify-center items-center flex-col gap-4 mt-24">
+          <Image
+            src="/no-data.svg"
+            width={200}
+            height={200}
+            alt="no data image"
+          />
+
+          <h2 className="text-xl font-medium">You have no rooms yet.</h2>
+        </div>
+      )}
     </main>
   );
 }
